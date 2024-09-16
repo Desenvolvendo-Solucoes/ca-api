@@ -1,4 +1,4 @@
-import {By, Builder} from 'selenium-webdriver'
+import {By, Builder, Browser} from 'selenium-webdriver'
 const chrome = require('selenium-webdriver/chrome');
 
 export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
@@ -7,13 +7,11 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
 
     let options = new chrome.Options();
     options.addArguments('--headless'); // Ativar o modo headless
-    options.addArguments('--disable-gpu'); // Necessário para rodar o headless no Windows
-    options.addArguments('--no-sandbox'); // Segurança extra (especialmente em Linux)
-    options.addArguments('--disable-dev-shm-usage'); // Otimização para contêineres
+    
   
     let driver = await new Builder()
-      .forBrowser('chrome')
-      .setChromeOptions(options)
+      .forBrowser(Browser.FIREFOX)
+      .setFirefoxOptions(options)
       .build();
 
     try {    
