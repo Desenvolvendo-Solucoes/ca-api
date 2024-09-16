@@ -32,18 +32,18 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
       const cnpjLaboratorio = await driver.findElement(By.xpath("//div[h3[text()='Laudos']]/p[strong[text()='CNPJ do Laboratório:']]")).getText()
       const razaoSocialLaboratorio = await driver.findElement(By.xpath("//div[h3[text()='Laudos']]/p[strong[text()='Razão Social:']]")).getText()
   
-      console.log('Nome: ' + nome);
-      console.log('Validade: ' + validade);
-      console.log('Nome Comercial: ' + nomeComercial)
-      console.log('Descrição: ' + descricao)
-      console.log('Imagem EPI: ', epiImage)
-      console.log('Razão Social do Importador: ', razaoSocialImportador.toString().split("\n")[1])
-      console.log('CNPJ Importador: ' + cnpjImportador.toString().split("\n")[1])
-      console.log('Cidade/UF: ' + cidadeUF.toString().split("\n")[1])
-      console.log("Normas: " + normas);
-      console.log("Número do Laudo: " + numLaudo.toString().split("\n")[1]);
-      console.log("CNPJ do Laboratório: " + cnpjLaboratorio.toString().split("\n")[1]);
-      console.log("Razão Social do Laboratório: " + razaoSocialLaboratorio.toString().split("\n")[1]);
+      // console.log('Nome: ' + nome);
+      // console.log('Validade: ' + validade);
+      // console.log('Nome Comercial: ' + nomeComercial)
+      // console.log('Descrição: ' + descricao)
+      // console.log('Imagem EPI: ', epiImage)
+      // console.log('Razão Social do Importador: ', razaoSocialImportador.toString().split("\n")[1])
+      // console.log('CNPJ Importador: ' + cnpjImportador.toString().split("\n")[1])
+      // console.log('Cidade/UF: ' + cidadeUF.toString().split("\n")[1])
+      // console.log("Normas: " + normas);
+      // console.log("Número do Laudo: " + numLaudo.toString().split("\n")[1]);
+      // console.log("CNPJ do Laboratório: " + cnpjLaboratorio.toString().split("\n")[1]);
+      // console.log("Razão Social do Laboratório: " + razaoSocialLaboratorio.toString().split("\n")[1]);
 
       infos = {
         nome,
