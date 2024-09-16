@@ -1,9 +1,11 @@
-const playwright = require('playwright');
+const playwright = require('playwright-aws-lambda');
+const { chromium } = require('playwright-core');
+const awsChromium = require('chrome-aws-lambda');
 
 export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
   return new Promise(async (resolve, reject) => {
     let infos: caScrapingInfos 
-    const browser = await playwright['chromium'].launch();
+    const browser = await chromium.launch({headless: true});
     const context = await browser.newContext();
     const page = await context.newPage();
     try {
@@ -47,6 +49,8 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
     }
     finally {
       await browser.close();
+      console.log('finalizou');
+      
       resolve(infos);
     }
   })
