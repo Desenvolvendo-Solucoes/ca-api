@@ -1,6 +1,6 @@
 const playwright = require('playwright');
 
-export const playwrightCaScraping = async (ca: string): Promise<caScrapingInfos> => {
+export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
   return new Promise(async (resolve, reject) => {
     let infos: caScrapingInfos 
     const browser = await playwright['chromium'].launch();
