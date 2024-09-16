@@ -1,11 +1,11 @@
 import {By, Builder, Browser} from 'selenium-webdriver'
-const chrome = require('selenium-webdriver/chrome');
+const firefox = require('selenium-webdriver/firefox');
 
 export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
   return new Promise(async (resolve, reject) => {
     let infos: caScrapingInfos 
 
-    let options = new chrome.Options();
+    let options = new firefox.Options();
     options.addArguments('--headless'); // Ativar o modo headless
     
   
