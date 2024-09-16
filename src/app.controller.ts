@@ -15,4 +15,15 @@ export class AppController {
       })
     })
   }
+
+  @Get('/teste/:id')
+  async teste(@Param('id') id: string): Promise<caScrapingInfos> {
+    return new Promise(async (resolve, reject) => {
+      console.log(id);
+
+      this.appService.teste(id).then((infos) => {
+        resolve(infos)
+      })
+    })
+  }
 }
