@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "dist/main.js",
+      "src": "src/main.js",
       "use": "@vercel/node"
     }
   ],
@@ -10,5 +10,17 @@
       "memory": 3008,
       "maxDuration": 60
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts",
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    }
+  ]
 }
