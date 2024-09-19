@@ -1,12 +1,14 @@
 type caScrapingInfos = {
+  ca: string, 
   nome: string;
   validade: string;
-  nomeComercial: string;
   descricao: string;
   imagem: string;
   importador: Importador;
+  fabricante: Importador;
   normas: string[];
   laudo: Laudo;
+  natureza: string;
 }
 
 type Laudo = {

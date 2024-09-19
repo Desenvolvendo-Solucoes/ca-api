@@ -7,7 +7,6 @@ export class AppService {
     return 'Hello World!';
   }
 
-
   getCAinfos(id: string): Promise<caScrapingInfos> {
     return new Promise(async (resolve, reject) => {
       const caInfos = await caScraping(id)

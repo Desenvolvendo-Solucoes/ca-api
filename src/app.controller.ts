@@ -34,8 +34,8 @@ export class AppController {
   } })
   async getHello(@Param('id') id: string): Promise<caScrapingInfos> {
     return new Promise(async (resolve, reject) => {
-      console.log(id);
-
+      console.log('iniciou a busca dos dados do ca: ' + id);
+      
       this.appService.getCAinfos(id).then((infos) => {
         resolve(infos)
       })
