@@ -13,9 +13,11 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
       let importador: Importador 
       let fabricante: Importador
 
-      const descricao = await page.locator("xpath=//div[h3[text()='Descrição Completa']]/p[@class='info']").textContent();
       const nome = await page.locator("xpath=/html/body/form/div[3]/div[4]/div[1]/div/div[1]/div/h1").textContent();
+      const status = await page.locator("xpath=//div[@id='box_result']/p[strong[text()='Situação:']]").textContent()
       const validade = await page.locator("xpath=//div[@id='box_result']/p[strong[text()='Validade:']]/span[@class='validade_ca regular']").textContent();
+      const numProcesso = await page.locator("xpath=//div[@id='box_result']/p[strong[text()='N° Processo:']]").textContent();
+      const descricao = await page.locator("xpath=//div[h3[text()='Descrição Completa']]/p[@class='info']").textContent();
       const epiImages = await page.locator("xpath=//div[h3[text()='Fotos do Equipamento']]/ul/li/a/img").all();
       let epiImage
       if(epiImages.length > 0) {
@@ -32,8 +34,7 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
       }
 
       const natureza = await page.locator("xpath=//div[@id='box_result']/p[strong[text()='Natureza:']]").textContent()
-      
-      
+
       if( natureza === 'Natureza:Nacional'){
         var razaoSocialFabricante = await page.locator("xpath=//div[h3[text()='Fabricante']]/div/p[strong[text()='Razão Social:']]").textContent()
         var cnpjFabricante = await page.locator("xpath=//div[h3[text()='Fabricante']]/div/p[strong[text()='CNPJ:']]").textContent()
@@ -62,8 +63,11 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
 
       infos = {
         ca,
+        status: status.split(":")[1],
         nome,
         validade,
+        natureza: natureza.split(':')[1],
+        numeroProcesso: numProcesso.split(':')[1],
         descricao,
         imagem: epiImage.toString(),
         importador,
@@ -74,7 +78,6 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
           cnpj: cnpjLaboratorio.split(':')[1],
           razaoSocial: razaoSocialLaboratorio.split(':')[1]
         },
-        natureza: natureza.split(':')[1]
       }
     }
     finally {

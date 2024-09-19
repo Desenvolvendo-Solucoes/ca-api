@@ -9,6 +9,8 @@ type caScrapingInfos = {
   normas: string[];
   laudo: Laudo;
   natureza: string;
+  numeroProcesso: string;
+  status: string;
 }
 
 type Laudo = {
