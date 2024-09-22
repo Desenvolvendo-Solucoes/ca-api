@@ -9,8 +9,16 @@ export class AppService {
 
   getCAinfos(id: string): Promise<caScrapingInfos> {
     return new Promise(async (resolve, reject) => {
-      const caInfos = await caScraping(id)
+      caScraping(id).then((caInfos) => {
       resolve(caInfos)
+      }).catch((e) => {
+
+        if(e == 'CA não encontrado') {
+          console.log(e);
+          
+          reject('CA não encontrado')
+        }
+      })
     })
   }
 

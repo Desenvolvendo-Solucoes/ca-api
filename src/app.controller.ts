@@ -1,6 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Req, Res, HttpStatus  } from '@nestjs/common';
 import { AppService } from './app.service';
 import { ApiProperty, ApiResponse } from '@nestjs/swagger';
+import { Response, Request } from 'express'
 
 @Controller()
 export class AppController {
@@ -32,12 +33,18 @@ export class AppController {
       }
     ]
   } })
-  async getHello(@Param('id') id: string): Promise<caScrapingInfos> {
+  async getHello(@Param('id') id: string, @Req() request: Request, @Res() response: Response): Promise<caScrapingInfos> {
     return new Promise(async (resolve, reject) => {
       console.log('iniciou a busca dos dados do ca: ' + id);
       
       this.appService.getCAinfos(id).then((infos) => {
-        resolve(infos)
+        response.status(HttpStatus.OK).json(infos)
+      }).catch((err) => {
+        
+        if (err == 'CA não encontrado') {
+          console.log(err);
+          response.status(HttpStatus.NOT_FOUND).send('CA não encontrado')
+        }
       })
     })
   }
