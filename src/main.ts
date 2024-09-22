@@ -8,8 +8,7 @@ async function bootstrap () {
 
   const corsOptions = {
     origin: "*", // ou 'http://localhost:3001'
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
   };
 
 
@@ -20,6 +19,11 @@ async function bootstrap () {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  app.enableCors({
+    origin: "*", // ou 'http://localhost:3001'
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  });
 
   // app.use(cors(corsOptions));
   await app.listen(3000);
