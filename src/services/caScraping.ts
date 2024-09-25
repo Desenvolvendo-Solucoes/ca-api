@@ -59,10 +59,38 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
           }
       }
 
+        const laudos = await page.locator("xpath=//div[h3[text()='Laudos']]/p").all()
+        let _laudos: Laudo[] = [];
+        let l: Laudo = {
+          numero: '',
+          cnpj: '',
+          razaoSocial: ''
+        }
+
+        let counter = 0
+        for (const x of laudos) {
+          switch (counter) {
+            case 0:
+              const numeroLaudo = await x.textContent()
+              l.numero = numeroLaudo.toString().split(':')[1]
+              counter++
+              break;
+            case 1: 
+              const cnpjLab = await x.textContent()
+              l.cnpj = cnpjLab.toString().split(':')[1]
+              counter++
+              break;
+             case 2:
+              const razSocial = await x.textContent()
+              l.razaoSocial = razSocial.toString().split(':')[1]
+              _laudos.push(l)
+              counter = 0              
+              break;
+          }
+        }
+        
         const normas = await page.locator("xpath=//div[h3[text()='Normas']]/ul/li").allTextContents()
-        const numLaudo = await page.locator("xpath=//div[h3[text()='Laudos']]/p[strong[text()='N° do Laudo:']]").textContent();
-        const cnpjLaboratorio = await page.locator("xpath=//div[h3[text()='Laudos']]/p[strong[text()='CNPJ do Laboratório:']]").textContent();
-        const razaoSocialLaboratorio = await page.locator("xpath=//div[h3[text()='Laudos']]/p[strong[text()='Razão Social:']]").textContent();
+        
 
         infos = {
           ca,
@@ -76,11 +104,7 @@ export const caScraping = async (ca: string): Promise<caScrapingInfos> => {
           importador,
           fabricante,
           normas: normas,
-          laudo: {
-            numero: numLaudo.split(':')[1],
-            cnpj: cnpjLaboratorio.split(':')[1],
-            razaoSocial: razaoSocialLaboratorio.split(':')[1]
-          },
+          laudos: _laudos
         }
       }
 
