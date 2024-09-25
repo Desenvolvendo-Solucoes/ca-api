@@ -8,7 +8,7 @@ RUN npm install --legacy-peer-deps
 
 RUN npx playwright install-deps 
 
-RUN npx playwright install 
+RUN npx playwright install chromium
 
 RUN npm run build
 

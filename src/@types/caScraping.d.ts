@@ -7,7 +7,7 @@ type caScrapingInfos = {
   importador: Importador;
   fabricante: Importador;
   normas: string[];
-  laudo: Laudo;
+  laudos: Laudo[];
   natureza: string;
   numeroProcesso: string;
   status: string;
